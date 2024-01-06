@@ -3,7 +3,7 @@ import axios from 'axios';
 import Plants from '../component/Plants';
 
 function Home() {
-    const url = 'https://perenual.com/api/species-list?key=sk-ry6665963ec8a9bec3643';
+    const url = 'https://perenual.com/api/species-list?key=sk-i4aZ6599410170e073674';
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     // const [plants, setPlants] = useState([]);
@@ -50,7 +50,7 @@ function Home() {
                                     id={plant.id} 
                                     name={plant.common_name} 
                                     cycle={plant.cycle} 
-                                    thumbnail={plant} 
+                                    thumbnail={plant.default_image ? plant.default_image.thumbnail : null} 
                                 /> 
                             ))}
                         </div>
