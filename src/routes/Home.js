@@ -3,7 +3,7 @@ import axios from 'axios';
 import Plants from '../component/Plants';
 
 function Home() {
-    const url = 'https://perenual.com/api/species-list?key=sk-i4aZ6599410170e073674';
+    const url = 'https://perenual.com/api/species-list?key=sk-wAuX659a3069bc18f3679';
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     // const [plants, setPlants] = useState([]);
@@ -25,18 +25,10 @@ function Home() {
         fetchData();
     }, []);
 
-    // const h = () => {
-    //     const plants = data.data;
-    //     for (let index = 0; index < plants.length; index++) {
-    //         const plant = plants.map(plants[index]);
-    //         return plant
-    //     }
-    // }
     let plants = data.data;
 
     console.log(plants);
 
-    //const pagination = (page,) => {}
 
     return (
         <div>
@@ -58,7 +50,8 @@ function Home() {
             }
         </div>
     );
+
+
 }
 
-export default Home;
-
+export default Home; 

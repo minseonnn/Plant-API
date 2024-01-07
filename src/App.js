@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import Detail from "./routes/Detail"
-import Navigator  from "./component/Navigator";
+import Search  from "./component/Search";
 
 function App() {
     return (
         <Router>
-            <Navigator />
+            <Search />
             <Routes>
                 <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />} />
                 <Route path="/plant/:id" element={<Detail />} />

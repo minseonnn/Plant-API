@@ -2,10 +2,11 @@ import Information from "../component/Information";
 import {useState, useEffect} from "react";
 import { useParams } from "react-router-dom"
 import axios from "axios";
+import Navigator from "../component/Search";
 
 function Detail() {
     const  {id} = useParams();
-    const url = `https://perenual.com/api/species/details/${id}?key=sk-i4aZ6599410170e073674`;
+    const url = `https://perenual.com/api/species/details/${id}?key=sk-wAuX659a3069bc18f3679`;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     useEffect(() => {
