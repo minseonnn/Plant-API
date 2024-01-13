@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100vw;
+}
+
+.wrapper > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
+/* .list_item {
+  width: 100% / 3;
+} */
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+div > h1 {
+  font-size: 1em;
+}

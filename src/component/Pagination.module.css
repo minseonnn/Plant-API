@@ -1,0 +1,22 @@
+.wrapper {
+  width: 60vw;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 40px 0;
+}
+
+ul {
+  width: 30vw;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+li {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}

@@ -3,6 +3,7 @@ import { axiosInstance } from '../axios';
 import { Link } from "react-router-dom";
 import Pagination from '../component/Pagination';
 import PlantsList from '../component/PlantsList';
+import styles from './Home.module.css'; 
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -41,8 +42,8 @@ function Home() {
                         page : currentPage,
                     }
                 })
-                //console.log(response.data);
-                // console.log(response.data.data);
+                console.log(response.data);
+                console.log(response.data.data);
                 // console.log(response.data.data[0]);
                 setPageData(response.data);
                 setPlants(response.data.data);
@@ -66,7 +67,7 @@ function Home() {
 
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -78,7 +79,7 @@ function Home() {
                 <button type="submit">🔍</button>
             </form>
             {loading ? (<div> Your search will be displayed here. </div>) : < PlantsList searchResults = {searchResults} />}
-            < Pagination postPerPage={postsPerPage} totalPost={pagedata.total} paginate={paginate}/>
+            < Pagination postPerPage={postsPerPage} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage}/>
         </div>
     );
 
