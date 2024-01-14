@@ -1,4 +1,18 @@
-function Information({data}) {
+interface DataType {
+  common_name:string,
+  cycle : string,
+  id : number,
+  cientific_name: string[],
+  watering:string,
+  default_image: {original_url:string},
+  flowers : boolean,
+  flowering_season :string,
+  fruits: boolean,
+  edible_fruit:boolean,
+  description:string,
+  scientific_name :string[]
+}
+const  Information : React.FC <{ data : DataType }> = ({data}) => {
   return (
     <div>
       <div><img src={data.default_image ? data.default_image.original_url : null} alt={data.common_name} /></div>

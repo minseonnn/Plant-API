@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from './PlantList.module.css'; 
+import styles from "./Plant.module.css";
 
-const PlantsList = ({searchResults}) => {
-  const slice = (txt) => {
+type PlantListProps = {
+  common_name:string,
+  cycle : string,
+  id : number,
+  cientific_name: string[],
+  watering:string,
+  default_image: {thumbnail: string, original_url:string}
+}
+
+const PlantsList1 : React.FC <{ searchResults:PlantListProps[] }> = ({ searchResults }) => {
+  const slice = (txt:string) => {
     let name;
     const txt_length = txt.length;
     if(txt_length > 21) { name = txt.slice(0,22) + "..";
@@ -14,11 +23,11 @@ const PlantsList = ({searchResults}) => {
   return (
     <div className={styles.wrapper}>
       <ul>
-      {searchResults.map((result) => (
+      {searchResults.map((result:PlantListProps) => (
                     <li key={result.id} >
                         <div>
                             <Link to={`/plant/${result.id}`}>
-                                <img src={result.default_image ? result.default_image.thumbnail : null} />
+                                <img src={result.default_image ? result.default_image.thumbnail : ""} />
                             </Link>
                         </div>
                         <div>
@@ -32,6 +41,6 @@ const PlantsList = ({searchResults}) => {
       </ul>
     </div>
   );
-} 
+}
 
-export default PlantsList; 
+export default PlantsList1; 
