@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Pagination.module.css"
 
+// FIXME: 검색하면 페이지 안바뀜, 마지막페이에서 네비게이션 불가
+
 const Pagination = ({ postPerPage, totalPost, paginate, totalPages, currentPage }) => {
   const maxBtn = 10;
   const pageNumbers = [];

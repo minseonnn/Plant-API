@@ -5,6 +5,8 @@ import Pagination from '../component/Pagination';
 import PlantsList from '../component/PlantsList';
 import styles from './Home.module.css'; 
 
+const POSTS_PER_PAGE = 30; //한 페이지에 30개씩 노출
+
 function Home() {
     const [loading, setLoading] = useState(true);
     const [pagedata, setPageData] = useState([]); //페이지정보
@@ -13,11 +15,6 @@ function Home() {
     const [searchResults, setSearchResults] = useState([]); // filter로 거른 식물 리스트 정보
     
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(30); //한 페이지에 30개씩 노출
-
-    // const indexOfLastPost = currentPage * postsPerPage; // 현 페이지의 마지막 포스트의 인덱스번호
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;// 현 페이지의 첫번째 포스트의 인덱스 번호
-    // const currentPosts = searchResults.slice(indexOfFirstPost, indexOfLastPost); // 현재 페이지의 포스트들 번호를 잘라서 가져옴
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -25,7 +22,7 @@ function Home() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        //setSearchResults([]);
+        
     };
 
     const handleKeyword = (event) => {
@@ -42,11 +39,12 @@ function Home() {
                         page : currentPage,
                     }
                 })
-                console.log(response.data);
-                console.log(response.data.data);
+                //console.log(response.data);
+                //console.log(response.data.data);
                 // console.log(response.data.data[0]);
                 setPageData(response.data);
                 setPlants(response.data.data);
+                setSearchResults(response.data.data);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -55,15 +53,17 @@ function Home() {
 
         fetchData();
 
-    }, [keyword, currentPage]);
+    }, [keyword, currentPage, plants]);
 
-    useEffect(() => {
-        // 검색어에 따라 데이터 필터링
-        const filteredData = plants.filter(item =>
-            item.common_name.toLowerCase().includes(keyword.toLowerCase())
-        );
-        setSearchResults(filteredData);
-    }, [keyword, plants]);
+    // useEffect(() => {
+    //     // 검색어에 따라 데이터 필터링
+        
+    //     setSearchResults()
+    //     // const filteredData = plants.filter(item =>
+    //     //     item.common_name.toLowerCase().includes(keyword.toLowerCase())
+    //     // );
+    //     // setSearchResults(filteredData);
+    // }, [keyword, plants]);
 
 
     return (
@@ -79,7 +79,7 @@ function Home() {
                 <button type="submit">🔍</button>
             </form>
             {loading ? (<div> Your search will be displayed here. </div>) : < PlantsList searchResults = {searchResults} />}
-            < Pagination postPerPage={postsPerPage} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage}/>
+            < Pagination postPerPage={POSTS_PER_PAGE} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage}/>
         </div>
     );
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from './PlantList.module.css'; 
+import { axiosInstance } from '../axios';
 
 const PlantsList = ({searchResults}) => {
   const slice = (txt) => {
@@ -11,6 +12,8 @@ const PlantsList = ({searchResults}) => {
       name = txt;
     } return name
   }
+
+
   return (
     <div className={styles.wrapper}>
       <ul>

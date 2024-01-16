@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use((config) => {
     ...config,
     params:{
       ...config.params,
-      key: 'sk-HGPE65a10972cbe893758'
+      key: 'sk-wAuX659a3069bc18f3679'
     }
   }
 })
