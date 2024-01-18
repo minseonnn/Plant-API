@@ -6,6 +6,7 @@ import PlantsList from '../component/PlantsList';
 import styles from './Home.module.css'; 
 
 const POSTS_PER_PAGE = 30; //한 페이지에 30개씩 노출
+const MaxBtn = 10;
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ function Home() {
                     }
                 })
                 //console.log(response.data);
-                //console.log(response.data.data);
+                console.log(response.data.data);
                 // console.log(response.data.data[0]);
                 setPageData(response.data);
                 setPlants(response.data.data);
@@ -53,17 +54,11 @@ function Home() {
 
         fetchData();
 
-    }, [keyword, currentPage, plants]);
+    }, [keyword, currentPage]);
 
-    // useEffect(() => {
-    //     // 검색어에 따라 데이터 필터링
-        
-    //     setSearchResults()
-    //     // const filteredData = plants.filter(item =>
-    //     //     item.common_name.toLowerCase().includes(keyword.toLowerCase())
-    //     // );
-    //     // setSearchResults(filteredData);
-    // }, [keyword, plants]);
+    useEffect(() => {
+        paginate(1);
+    },[keyword])
 
 
     return (
@@ -79,7 +74,7 @@ function Home() {
                 <button type="submit">🔍</button>
             </form>
             {loading ? (<div> Your search will be displayed here. </div>) : < PlantsList searchResults = {searchResults} />}
-            < Pagination postPerPage={POSTS_PER_PAGE} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage}/>
+            < Pagination postPerPage={POSTS_PER_PAGE} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage} MaxBtn = {MaxBtn}/>
         </div>
     );
 
