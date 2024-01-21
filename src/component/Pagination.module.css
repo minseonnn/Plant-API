@@ -6,6 +6,7 @@
 }
 
 ul {
+  list-style:  none;
   width: 30vw;
   display: grid;
   grid-template-columns: repeat(10, 1fr);

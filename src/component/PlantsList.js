@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from './PlantList.module.css'; 
+//import styles from './PlantList.module.css'; 
 import { axiosInstance } from '../axios';
+import noImg from "../img/no_img.jpg";
+import styled from "styled-components";
 
 const PlantsList = ({searchResults}) => {
   const slice = (txt) => {
@@ -15,26 +17,56 @@ const PlantsList = ({searchResults}) => {
 
 
   return (
-    <div className={styles.wrapper}>
-      <ul>
+    <Wrapper>
+      <List>
       {searchResults.map((result) => (
                     <li key={result.id} >
-                        <div>
+                        <ImageWrapper>
                             <Link to={`/plant/${result.id}`}>
-                                <img src={result.default_image ? result.default_image.thumbnail : null} />
+                                <Plantimg src={result.default_image ? result.default_image.thumbnail : noImg} />
                             </Link>
-                        </div>
+                        </ImageWrapper>
                         <div>
-                            <h1>
-                                <Link to={`/plant/${result.id}`}>{slice(result.common_name)}</Link>
-                            </h1>
+                            <Plantname>
+                                <StyledLink to={`/plant/${result.id}`}>{slice(result.common_name)}</StyledLink>
+                            </Plantname>
                             <p>{result.cycle}</p>
                         </div>
                     </li>
                 ))}
-      </ul>
-    </div>
+      </List>
+    </Wrapper>
   );
 } 
+
+const Wrapper = styled.div`
+  width: 100vw;
+`;
+
+const List = styled.ul`
+list-style:  none;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+width: 100%;
+`;
+
+const ImageWrapper = styled.div `
+max-width: 100%;
+  height: auto;
+`;
+
+const Plantimg = styled.img`
+max-width: 100%;
+  height: auto;
+`;
+
+const Plantname = styled.h1`
+font-size: 1em;
+`;
+
+const StyledLink = styled(Link)`
+color: black;
+  text-decoration: none;
+`;
 
 export default PlantsList; 

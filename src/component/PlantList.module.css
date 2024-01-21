@@ -20,3 +20,18 @@ a {
 div > h1 {
   font-size: 1em;
 }
+
+.imageWrapper {
+  max-width: 100%;
+  height: auto;
+  display: flex; /* Flexbox 추가 */
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 가운데 정렬 */
+}
+
+.imageWrapper img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 왜 import한 이미지만 비율이 엉망인지 */

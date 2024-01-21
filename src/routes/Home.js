@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Pagination from '../component/Pagination';
 import PlantsList from '../component/PlantsList';
 import styles from './Home.module.css'; 
+import styled from 'styled-components';
 
 const POSTS_PER_PAGE = 30; //한 페이지에 30개씩 노출
 const MaxBtn = 10;
@@ -14,7 +15,7 @@ function Home() {
     const [plants, setPlants] = useState([]); // 식물정보
     const [keyword, setKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]); // filter로 거른 식물 리스트 정보
-    
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const paginate = (pageNumber) => {
@@ -23,7 +24,7 @@ function Home() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
     };
 
     const handleKeyword = (event) => {
@@ -37,7 +38,7 @@ function Home() {
                 const response = await axiosInstance.get(url, {
                     params: {
                         q: keyword,
-                        page : currentPage,
+                        page: currentPage,
                     }
                 })
                 //console.log(response.data);
@@ -58,13 +59,13 @@ function Home() {
 
     useEffect(() => {
         paginate(1);
-    },[keyword])
+    }, [keyword])
 
 
     return (
-        <div className={styles.wrapper}>
-            <form onSubmit={handleSubmit}>
-                <input
+        <Wrapper>
+            <Submit onSubmit={handleSubmit}>
+                <Search
                     type="text"
                     onChange={handleKeyword}
                     value={keyword}
@@ -72,13 +73,31 @@ function Home() {
                     autoFocus
                 />
                 <button type="submit">🔍</button>
-            </form>
-            {loading ? (<div> Your search will be displayed here. </div>) : < PlantsList searchResults = {searchResults} />}
-            < Pagination postPerPage={POSTS_PER_PAGE} totalPost={pagedata.total} paginate={paginate} totalPages = {pagedata.last_page} currentPage = {currentPage} MaxBtn = {MaxBtn}/>
-        </div>
+            </Submit>
+            {loading ? (<div> Your search will be displayed here. </div>) : < PlantsList searchResults={searchResults} />}
+            < Pagination postPerPage={POSTS_PER_PAGE} totalPost={pagedata.total} paginate={paginate} totalPages={pagedata.last_page} currentPage={currentPage} MaxBtn={MaxBtn} />
+        </Wrapper>
     );
 
 
 }
+
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
+
+const Submit = styled.form`
+margin: 40px auto;
+}
+`;
+
+const Search = styled.input`
+border: none;
+border-bottom: solid black 1px;
+margin: 0 10px;
+outline: none;
+`;
 
 export default Home; 
